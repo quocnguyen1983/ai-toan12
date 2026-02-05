@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AI Toán 12 - Đạo hàm</title>
+</head>
+<body>
+  <h1>AI hỗ trợ Toán 12</h1>
+
+  <textarea id="input" rows="5" cols="50"></textarea>
+  <br><br>
+
+  <button onclick="send()">Gửi cho AI</button>
+
+  <p>Kết quả:</p>
+  <pre id="output"></pre>
+
+  <script>
+    async function send() {
+      const text = document.getElementById("input").value;
+
+      const res = await fetch("http://localhost:3001/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ question: text }),
+      });
+
+      const data = await res.json();
+      document.getElementById("output").innerText = data.answer;
+    }
+  </script>
+</body>
+</html>
